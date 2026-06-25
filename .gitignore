@@ -1,0 +1,11 @@
+# Python artifacts
+__pycache__/
+*.pyc
+backend/eenv/    # Tumhara virtual environment folder
+
+# React artifacts
+frontend/node_modules/
+frontend/dist/
+
+# Security env files
+.env
