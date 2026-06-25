@@ -1,5 +1,5 @@
 # 1. Base image chuni (Python ka official version virtual box me)
-FROM python:3.13.7
+FROM python:3.11-slim
 
 # 2. Container ke andar ek folder banaya jahan code rahega
 WORKDIR /app
