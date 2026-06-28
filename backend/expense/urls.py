@@ -1,15 +1,21 @@
 from django.urls import path
-from .views import get_groups, create_group,add_expense,get_expense,group_balances,delete_group,get_all_users,add_member_to_group
+from .views import get_user_groups, create_group,add_expense,group_balances,delete_group,get_all_users,add_member_to_group,register_user
+from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView)
+
 
 urlpatterns = [
-    path("groups/",get_groups,name="get_group"),
+    path('auth/login/',TokenObtainPairView.as_view(),name='token_obtain_pair'),
+    path('auth/token/refresh/',TokenRefreshView.as_view(),name='token_refresh'),
+
+    path("groups/",get_user_groups,name="get_group"),
     path("groups/create/",create_group,name="create_group"),
-    path("expenses/",get_expense,name="get_expense"),
+    # path("expenses/",get_expense,name="get_expense"),
     path("expenses/add/",add_expense,name="create_expense"),
     path("groups/<int:group_id>/balances/",group_balances,name="group_balances"),
     path("groups/<int:id>/delete/",delete_group,name="delete_group"),
     path('groups/<int:group_id>/add-member/',add_member_to_group),
     path('users/', get_all_users), # Saare users pane ke liye
+    path('auth/register/',register_user,name="add_user")
 
 ]
 

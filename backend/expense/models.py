@@ -6,7 +6,7 @@ class Group(models.Model):
     name = models.CharField(max_length=150)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name="app_groups")
-    
+    password = models.CharField(max_length=128, default="1234")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
