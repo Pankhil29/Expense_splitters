@@ -39,17 +39,32 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      # 🎯 FIX: GitHub Actions ke environment me ek temporary dummy .env file create karenge
-      - name: Create Dummy .env File for django-environ
+      # 🎯 BULLETPROOF FIX: Har possible directory me sahi se `.env` dump karna aur verify karna
+      - name: Create and Verify .env File
         run: |
-          echo "SECRET_KEY=django-insecure-test-key-for-github-actions-pipeline-123" >> backend/.env
+          echo "SECRET_KEY=django-insecure-test-key-for-github-actions-pipeline-123" > backend/.env
           echo "DB_HOST=localhost" >> backend/.env
           echo "DB_NAME=splitwise_db" >> backend/.env
           echo "DB_USER=splitwise_admin" >> backend/.env
           echo "DB_PASSWORD=mysecretpassword" >> backend/.env
           echo "DB_PORT=5432" >> backend/.env
+          
+          # Ek copy settings folder (core) ke andar bhi daal dete hain safer side ke liye
+          cp backend/.env backend/core/.env
+          
+          # Debugging/Verification step taaki log me dikhe ki file bani ya nahi
+          echo "--- Verifying .env location ---"
+          ls -la backend/
 
+      # 🚀 Step 4 ke andar env blocks bhi explicit rakhenge taaki django-environ fallback utha sake
       - name: Run Django Automation Tests 🧪
+        env:
+          SECRET_KEY: "django-insecure-test-key-for-github-actions-pipeline-123"
+          DB_HOST: localhost
+          DB_NAME: splitwise_db
+          DB_USER: splitwise_admin
+          DB_PASSWORD: mysecretpassword
+          DB_PORT: 5432
         run: |
           cd backend
           python manage.py test
