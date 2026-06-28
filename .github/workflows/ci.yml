@@ -48,6 +48,7 @@ jobs:
       # 4. Run Django Tests (Yahan database host localhost hoga pipeline me)
       - name: Run Django Automation Tests 🧪
         env:
+          SECRET_KEY: "django-insecure-test-key-for-github-actions-pipeline-123"
           DB_HOST: localhost # 👈 IMPORTANT FIX: Ise 'localhost' hi rakhna hai GitHub Actions ke liye!
           DB_NAME: splitwise_db # 👈 Tumhara actual DB Name
           DB_USER: splitwise_admin # 👈 Tumhara actual DB User
