@@ -16,9 +16,9 @@ jobs:
       db:
         image: postgres:15
         env:
-          POSTGRES_DB: splitwise_db # Jo tumhare settings.py me test db name ho
-          POSTGRES_USER: splitwise_admin
-          POSTGRES_PASSWORD: mysecretpassword
+          POSTGRES_DB: splitwise_db # 👈 Tumhara actual DB Name
+          POSTGRES_USER: splitwise_admin # 👈 Tumhara actual DB User
+          POSTGRES_PASSWORD: mysecretpassword # 👈 Tumhara actual DB Password
         ports:
           - 5432:5432
         # Check ki postgres ready ho jaye
@@ -48,10 +48,11 @@ jobs:
       # 4. Run Django Tests (Yahan database host localhost hoga pipeline me)
       - name: Run Django Automation Tests 🧪
         env:
-          DB_HOST: db
-          DB_NAME: splitwise_db
-          DB_USER: splitwise_admin
-          DB_PASSWORD: mysecretpassword
+          DB_HOST: localhost # 👈 IMPORTANT FIX: Ise 'localhost' hi rakhna hai GitHub Actions ke liye!
+          DB_NAME: splitwise_db # 👈 Tumhara actual DB Name
+          DB_USER: splitwise_admin # 👈 Tumhara actual DB User
+          DB_PASSWORD: mysecretpassword # 👈 Tumhara actual DB Password
+          DB_PORT: 5432
         run: |
           cd backend
           python manage.py test
