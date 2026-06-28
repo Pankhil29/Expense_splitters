@@ -48,10 +48,10 @@ jobs:
           echo "DB_USER=splitwise_admin" >> backend/.env
           echo "DB_PASSWORD=mysecretpassword" >> backend/.env
           echo "DB_PORT=5432" >> backend/.env
-          
+
           # Ek copy settings folder (core) ke andar bhi daal dete hain safer side ke liye
           cp backend/.env backend/core/.env
-          
+
           # Debugging/Verification step taaki log me dikhe ki file bani ya nahi
           echo "--- Verifying .env location ---"
           ls -la backend/
@@ -71,4 +71,4 @@ jobs:
 
       - name: Verify Docker Compose Configuration 🐳
         run: |
-          docker-compose build
+          docker compose build
