@@ -87,13 +87,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'), 
-        'PORT': env('DB_PORT'),
+        'NAME': os.environ.get('DB_NAME', 'expense_db'),         # 👈 Default value local docker waali rakhna
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
+        'HOST': os.environ.get('DB_HOST', 'db'),                  # 👈 Locally docker me 'db' chalega, CI me automatically 'localhost' ho jayega!
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
+
+# 💡 AutoField Warning Hatane Ke Liye Yeh Line Sabse Niche Jodh Do:
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Password validation

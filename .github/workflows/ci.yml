@@ -16,9 +16,9 @@ jobs:
       db:
         image: postgres:15
         env:
-          POSTGRES_DB: expense_db # Jo tumhare settings.py me test db name ho
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: splitwise_db # Jo tumhare settings.py me test db name ho
+          POSTGRES_USER: splitwise_admin
+          POSTGRES_PASSWORD: mysecretpassword
         ports:
           - 5432:5432
         # Check ki postgres ready ho jaye
@@ -48,10 +48,10 @@ jobs:
       # 4. Run Django Tests (Yahan database host localhost hoga pipeline me)
       - name: Run Django Automation Tests 🧪
         env:
-          DB_HOST: localhost
-          DB_NAME: expense_db
-          DB_USER: postgres
-          DB_PASSWORD: password
+          DB_HOST: db
+          DB_NAME: splitwise_db
+          DB_USER: splitwise_admin
+          DB_PASSWORD: mysecretpassword
         run: |
           cd backend
           python manage.py test
