@@ -18,4 +18,4 @@ COPY . /app/
 # 6. Command batayi ki container start hote hi server kaise chalega
 # Puraani CMD line ko hata kar ye daal do:
 # 🎯 FIXED CMD LINE WITH DJANGO_SETTINGS_MODULE EXPLICITLY PASSED
-CMD ["sh", "-c", "python manage.py migrate && DJANGO_SETTINGS_MODULE=core.settings python -c \"import django; django.setup(); from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'SuperPassword123')\" && python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py migrate && DJANGO_SETTINGS_MODULE=core.settings python -c \"import django; django.setup(); from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@example.com', 'SuperPassword123')\" && python manage.py runserver 0.0.0.0:8000"]
