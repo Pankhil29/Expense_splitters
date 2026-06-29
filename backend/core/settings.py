@@ -34,6 +34,16 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://expense-splitters.vercel.app',  # 👈 Apne actual Vercel app ka URL yahan daalo
+    'https://*.vercel.app',                  # Taaki vercel ke saare subdomains allow ho jayein
+]
+
+# 2. Cookies aur Session settings production ke liye secure karo
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Application definition
 

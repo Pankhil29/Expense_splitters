@@ -16,5 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # 6. Command batayi ki container start hote hi server kaise chalega
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Puraani CMD line ko hata kar ye daal do:
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
 
